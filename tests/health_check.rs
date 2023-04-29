@@ -1,18 +1,22 @@
+use std::net::TcpListener;
 use email_newsletter::run;
 
 
-fn spawn_app() {
-    let server = run()
-        .expect("Failed to bind address");
+fn spawn_app() -> String {
+    let listener = TcpListener::bind("127.0.0.1:0")
+        .expect("Failed to bind random port");
+    let port = listener.local_addr().unwrap().port();
+    let server = run(listener).expect("Failed to bind address");
     let _ = tokio::spawn(server);
+    format!("http://127.0.0.1:{}",port)
 }
 
 
 #[tokio::test]
 async fn health_check_will_return_200() {
-    spawn_app();
+    let address = spawn_app();
     let client = reqwest::Client::new();
-    let response = client.get("http://localhost:8000/health").send().await.expect("Failed to send request");
+    let response = client.get(&format!("{}/health", &address)).send().await.expect("Failed to send request");
     assert!(response.status().is_success());
     assert_eq!(response.content_length(), Some(0));
 
