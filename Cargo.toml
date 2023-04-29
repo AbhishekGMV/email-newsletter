@@ -3,6 +3,14 @@ name = "email_newsletter"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+path = "src/main.rs"
+name = "email_newsletter"
+
+
+[lib]
+path = "src/lib.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -10,3 +18,4 @@ actix-web = "4.3.1"
 serde = "1.0.160"
 serde_json = "1.0.96"
 tokio = {version = "1.28.0", features = ["macros", "rt-multi-thread"]}
+
