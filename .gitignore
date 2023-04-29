@@ -1,0 +1,17 @@
+# Rust build artifacts
+target/
+
+# Rust package manager files
+Cargo.lock
+cargo.toml.orig
+
+# Crates.io credentials
+.crates.toml
+
+# Generated documentation
+doc/
+target/doc/
+
+# Compiled Rust libraries
+**/*.rlib
+**/*.rmeta
