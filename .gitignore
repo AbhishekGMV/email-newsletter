@@ -15,3 +15,4 @@ target/doc/
 # Compiled Rust libraries
 **/*.rlib
 **/*.rmeta
+.DS_Store
